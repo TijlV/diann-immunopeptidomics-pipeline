@@ -10,7 +10,6 @@ workflow {
     lib_out_ch = Channel.from(params.lib_ranges)
         | map {it -> [it.min_pr_mz, it.max_pr_mz, it.charge, params.fasta, params.crap_fasta]}
         | lib_creation
-        | collectFile()
 
     // make MHC prediction librarby
 

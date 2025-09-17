@@ -13,13 +13,12 @@ process diann_run1 {
 
     script:
     """
-    # NEEDS CLEANING
-    F_FILES=\$(ls ${dia_files} | grep ".d\$" | awk '{print "--f " \$0}')
+    F_FILES=\$(for f in ${dia_files}/*.d; do echo -n "--f \$f "; done)
 
     /diann-2.2.0/diann-linux \\
         --threads ${params.threads} \\
-        --verbose 2 \\
-        --out diann_report.parquet \\
+        --verbose 1 \\
+        --out diann_report_z${charge}.parquet \\
         --qvalue ${params.qvalue} \\
         --matrices \\
         \$F_FILES \\
