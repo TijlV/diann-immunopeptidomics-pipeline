@@ -1,15 +1,14 @@
 #!/usr/bin/env nextflow
 
 process diann_run1 {
-    publishDir 'results', mode: 'copy'
+    publishDir "${params.outDir}/z${charge}", mode: 'copy'
     container 'paretje/diann:2.2.0'
 
     input:
     tuple val(charge), path(dia_files), path(fasta), path(crap_fasta), path(lib), path(ref_lib)
 
     output:
-    path "diann_report_z${charge}.parquet"
-    path "diann_z${charge}_DIA.parquet"
+    tuple val(charge), path("z${charge}/diann_report_z${charge}.parquet"), path("z${charge}/diann_z${charge}_DIA.parquet")
 
     script:
     """

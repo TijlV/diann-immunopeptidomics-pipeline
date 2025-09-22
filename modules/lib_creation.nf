@@ -1,13 +1,14 @@
 #!/usr/bin/env nextflow
 
 process lib_creation {
+    publishDir "${params.outDir}/libs", mode: 'copy'
     container 'paretje/diann:2.2.0'
 
     input:
     tuple val(min_pr_mz), val(max_pr_mz), val(charge), path(fasta), path(crap_fasta)
 
     output:
-    tuple val(charge), path("lib_z${charge}.predicted.speclib"), emit: lib_out
+    tuple val(charge), path("lib_z${charge}.predicted.speclib")
 
     script:
     """
