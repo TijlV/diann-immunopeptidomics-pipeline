@@ -8,18 +8,17 @@ include { diann_run2 } from './modules/diann_run2.nf'
 workflow {
     if ( params.generate_libs ) {
             // make z1/z2/z3 libraries
-            lib_creation_ch = Channel.from(params.lib_ranges)
+        lib_creation_ch = Channel.from(params.lib_ranges)
             .map { it -> [it.min_pr_mz, it.max_pr_mz, it.charge, params.fasta, params.crap_fasta] }
 
         lib_creation(lib_creation_ch)
         lib_out_ch = lib_creation.out
-
-    } 
+    }
     else {
         lib_files_with_charge = params.lib_ranges.collect { range -> [range.charge, file(params["lib_z${range.charge}"])] }
         lib_out_ch = Channel.from(lib_files_with_charge)
     }
-    
+
     // make MHC prediction librarby
 
     // diann run 1

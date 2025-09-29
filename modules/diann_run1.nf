@@ -8,7 +8,7 @@ process diann_run1 {
     tuple val(charge), path(dia_files), path(fasta), path(crap_fasta), path(lib), path(ref_lib)
 
     output:
-    tuple val(charge), path("z${charge}/diann_report_z${charge}.parquet"), path("z${charge}/diann_z${charge}_DIA.parquet")
+    tuple val(charge), path("diann_report_z${charge}.parquet"), path("diann_z${charge}_DIA.parquet")
 
     script:
     """

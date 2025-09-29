@@ -8,8 +8,15 @@ process diann_run2 {
     tuple path(dia_files), path(fasta), path(crap_fasta), path(lib1), path(lib2), path(lib3)
 
     output:
-    path "diann_report_emperical.parquet"
     path "diann_emperical_DIA.parquet"
+    path "diann_emperical_DIA.site_report.parquet"
+    path "diann_emperical_DIA.pr_matrix.tsv"
+    path "diann_emperical_DIA.pg_matrix.tsv"
+    path "diann_emperical_DIA.gg_matrix.tsv"
+    path "diann_emperical_DIA.unique_genes_matrix.tsv"
+    path "diann_emperical_DIA.manifest.txt"
+    path "diann_emperical_DIA.stats.tsv"
+    path "diann_emperical_DIA.log.txt"
 
     script:
     """
@@ -31,8 +38,9 @@ process diann_run2 {
         --fasta ${crap_fasta} \\
         --fasta ${fasta} \\
         --met-excision \\
+        --var-mod ${params.var_mod} \\
         --min-pep-len ${params.min_pep_len_2} \\
-        --max-pep-len 30 ${params.max_pep_len_2} \\
+        --max-pep-len ${params.max_pep_len_2} \\
         --min-pr-mz ${params.min_pr_mz_2} \\
         --max-pr-mz ${params.max_pr_mz_2} \\
         --min-pr-charge ${params.min_pr_charge} \\
