@@ -8,8 +8,18 @@ process diann_run1 {
     tuple val(charge), path(dia_files), path(fasta), path(crap_fasta), path(lib), path(ref_lib)
 
     output:
-    tuple val(charge), path("diann_report_z${charge}.parquet"), path("diann_z${charge}_DIA.parquet")
-
+    tuple path("diann_report_z${charge}.parquet"), 
+        path("diann_z${charge}_lib.parquet"),
+        path("diann_report_z${charge}.log.txt"),
+        path("diann_report_z${charge}.manifest.txt"),
+        path("diann_report_z${charge}.gg_matrix.tsv"),
+        path("diann_report_z${charge}.pg_matrix.tsv"),
+        path("diann_report_z${charge}.pr_matrix.tsv"),
+        path("diann_report_z${charge}.protein_description.tsv"),
+        path("diann_report_z${charge}.stats.tsv"),
+        path("diann_report_z${charge}.site_report.parquet"),
+        path("diann_report_z${charge}.unique_genes_matrix.tsv")
+    
     script:
     """
     F_FILES=\$(for f in ${dia_files}/*.d; do echo -n "--f \$f "; done)
@@ -40,6 +50,6 @@ process diann_run1 {
         --fasta ${fasta} \\
         --proteoforms \\
         --gen-spec-lib \\
-        --out-lib diann_z${charge}_DIA.parquet
+        --out-lib diann_z${charge}_lib.parquet
     """
 }

@@ -1,0 +1,8 @@
+{"Library in .speclib format for Skyline":"diann_z3_lib.parquet.skyline.speclib"}
+{"Main .parquet report":"diann_emperical_DIA.parquet"}
+{"Site report":"diann_emperical_DIA.site_report.parquet"}
+{"Matrix of precursor quantities":"diann_emperical_DIA.pr_matrix.tsv"}
+{"Matrix of QuantUMS/MaxLFQ protein group quantities":"diann_emperical_DIA.pg_matrix.tsv"}
+{"Matrix of QuantUMS/MaxLFQ gene group quantities":"diann_emperical_DIA.gg_matrix.tsv"}
+{"Matrix of QuantUMS/MaxLFQ gene quantities calculated with proteotypic peptides":"diann_emperical_DIA.unique_genes_matrix.tsv"}
+{"Protein description":"diann_emperical_DIA.protein_description.tsv"}

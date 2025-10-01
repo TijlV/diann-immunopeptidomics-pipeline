@@ -1,0 +1,116 @@
+
+DIA-NN 2.2.0 Academia  (Data-Independent Acquisition by Neural Networks)
+Compiled on May 29 2025 15:05:00
+Current date and time: Tue Sep 30 09:23:35 2025
+Logical CPU cores: 256
+/diann-2.2.0/diann-linux --threads 64 --verbose 1 --out diann_report_z3.parquet --qvalue 0.01 --matrices --f raw1/T064137_AurEl8_PM8_DIAIMP_CMB-1719_helalis_1_RD2_1_11076.d --f raw1/T064139_AurEl8_PM8_DIAIMP_CMB-1719_helalis_2_RD3_1_11078.d --lib lib_z3.predicted.speclib --window 7 --mass-acc 15.0 --mass-acc-ms1 15.0 --rt-profiling --ref diann-lib.predicted.speclib --var-mod UniMod:312,119.004099,C --rt-window-mul 1.7 --rt-window-factor 100 --min-cal 500 --min-class 1000 --mass-acc-cal 25 --time-corr-only --min-corr 2.0 --corr-diff 1.0 --fasta crap.fasta --fasta EGD_human.fasta --proteoforms --gen-spec-lib --out-lib diann_z3_lib.parquet 
+
+Thread number set to 64
+Output will be filtered at 0.01 FDR
+Precursor/protein x samples expression level matrices will be saved along with the main report
+Scan window radius set to 7
+The spectral library (if generated) will retain the original spectra but will include empirically-aligned RTs
+Modification UniMod:312 with mass delta 119.004 at C will be considered as variable
+RT window multiplier will be set to 1.7
+RT window factor set to 100
+Minimum number of precursors used for calibration set to 500
+Minimum number of precursors used for linear classifier training set to 1000
+Calibration mass accuracy set to 2.5e-05
+DIA-NN will disable machine learning during the calibration stage to save memory, this may lead to somewhat lower identification numbers; will be deactivated for the second MBR pass
+Only peak groups with correlation-based score exceeding 2 will be considered; will be deactivated for the second MBR pass
+Peak groups with correlation-based score at 1 below the maximum will be excluded; will be deactivated for the second MBR pass
+Protein identification will rely on peptidoform confidence for matched peptides
+A spectral library will be generated
+Mass accuracy will be fixed to 1.5e-05 (MS2) and 1.5e-05 (MS1)
+The following variable modifications will be localised: UniMod:312 
+
+2 files will be processed
+[0:00] Loading spectral library lib_z3.predicted.speclib
+[3:33] Library annotated with sequence database(s): crap.fasta; EGD_human.fasta
+[3:50] Spectral library loaded: 23475 protein isoforms, 66581 protein groups and 46983960 precursors in 46983960 elution groups.
+[3:50] Loading protein annotations from FASTA crap.fasta
+[3:51] Loading protein annotations from FASTA EGD_human.fasta
+[3:51] Annotating library proteins with information from the FASTA database
+[3:51] Gene names missing for some isoforms
+[3:51] Library contains 23472 proteins, and 23082 genes
+[4:30] Initialising library
+[6:42] Loading spectral library diann-lib.predicted.speclib
+[6:42] Spectral library loaded: 2928 protein isoforms, 2928 protein groups and 6743 precursors in 6212 elution groups.
+[6:42] Initialising library
+WARNING: it is strongly recommended to enable MBR when analysing with a large library, if this is a quantitative analysis
+
+[6:44] File #1/2
+[6:44] Loading run raw1/T064137_AurEl8_PM8_DIAIMP_CMB-1719_helalis_1_RD2_1_11076.d
+[10:43] Calibrating retention times using a set of reference precursors.
+[10:43] Pre-processing...
+[10:45] 3720 MS1 and 89256 MS2 scans in 3719 (inferred) and 3719 (encoded) cycles, 6743 precursors in range
+[10:49] RT window set to 6.62721
+[10:49] IM window set to 0.05
+[10:49] Pre-processing...
+[11:01] 3720 MS1 and 89256 MS2 scans in 3719 (inferred) and 3719 (encoded) cycles, 41511483 precursors in range
+[11:09] Calibrating with mass accuracies 15 (MS1), 15 (MS2)
+[71:01] RT window set to 3.76949
+[71:10] Recommended MS1 mass accuracy setting: 12 ppm
+[155:39] Main search
+[195:04] Removing low confidence identifications
+[195:24] Removing interfering precursors
+[196:12] Number of IDs at 0.01 FDR: 0
+[196:28] Calculating protein q-values
+[196:37] Number of genes identified at 1% FDR: 0 (precursor-level), 0 (protein-level) (inference performed using proteotypic peptides only)
+[196:39] Quantification
+[196:45] Precursors with scored PTMs at 1% FDR: 0 out of 0 considered
+[196:45] Precursors with all scored PTM sites unoccupied at 1% FDR: 0
+[196:45] Precursors with PTMs localised (when required) with > 90% confidence: 0 out of 0
+[196:49] Quantification information saved to raw1/T064137_AurEl8_PM8_DIAIMP_CMB-1719_helalis_1_RD2_1_11076.d.quant
+
+[196:49] File #2/2
+[196:49] Loading run raw1/T064139_AurEl8_PM8_DIAIMP_CMB-1719_helalis_2_RD3_1_11078.d
+[200:16] Calibrating retention times using a set of reference precursors.
+[200:16] Pre-processing...
+[200:19] 3719 MS1 and 89253 MS2 scans in 3719 (inferred) and 3719 (encoded) cycles, 6743 precursors in range
+[200:23] RT window set to 6.21532
+[200:23] IM window set to 0.05
+[200:23] Pre-processing...
+[200:33] 3719 MS1 and 89253 MS2 scans in 3719 (inferred) and 3719 (encoded) cycles, 41511483 precursors in range
+[200:40] Calibrating with mass accuracies 15 (MS1), 15 (MS2)
+[239:13] RT window set to 4.20301
+[239:23] Recommended MS1 mass accuracy setting: 8 ppm
+[313:33] Main search
+[346:24] Removing low confidence identifications
+[346:40] Removing interfering precursors
+[347:24] Number of IDs at 0.01 FDR: 0
+[347:40] Calculating protein q-values
+[347:44] Number of genes identified at 1% FDR: 0 (precursor-level), 0 (protein-level) (inference performed using proteotypic peptides only)
+[347:45] Quantification
+[347:48] Precursors with scored PTMs at 1% FDR: 0 out of 0 considered
+[347:48] Precursors with all scored PTM sites unoccupied at 1% FDR: 0
+[347:48] Precursors with PTMs localised (when required) with > 90% confidence: 0 out of 0
+[347:51] Quantification information saved to raw1/T064139_AurEl8_PM8_DIAIMP_CMB-1719_helalis_2_RD3_1_11078.d.quant
+
+[347:51] Cross-run analysis
+[347:51] Reading quantification information: 2 files
+[348:53] Quantifying peptides
+WARNING: not enough peptides for normalisation
+WARNING: not enough peptides for normalisation
+[348:53] Assembling protein groups
+[349:03] Quantifying proteins
+[349:04] Calculating q-values for protein and gene groups
+[349:18] Calculating global q-values for protein and gene groups
+[349:19] Protein groups with global q-value <= 0.01: 0
+Protein-level normalisation will not be performed
+[349:19] Compressed report saved to diann_report_z3.parquet. Use R 'arrow' or Python 'PyArrow' package to process
+[349:19] Site report saved to diann_report_z3.site_report.parquet
+[349:19] Saving precursor levels matrix
+[349:19] Precursor levels matrix (1% precursor and protein group FDR) saved to diann_report_z3.pr_matrix.tsv.
+[349:19] Saving protein group levels matrix
+[349:19] Protein groups matrix saved to diann_report_z3.pg_matrix.tsv.
+[349:19] Saving gene group levels matrix
+[349:19] Gene groups matrix saved to diann_report_z3.gg_matrix.tsv.
+[349:19] Saving unique genes levels matrix
+[349:19] Unique genes matrix saved to diann_report_z3.unique_genes_matrix.tsv.
+[349:19] Manifest saved to diann_report_z3.manifest.txt
+[349:19] Stats report saved to diann_report_z3.stats.tsv
+[349:20] Generating spectral library:
+[349:21] 0 precursors saved
+[349:21] Spectral library saved to diann_z3_lib.parquet
+

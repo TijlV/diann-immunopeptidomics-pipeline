@@ -32,7 +32,7 @@ workflow {
         .groupTuple()
 
     diann_run1_libs = diann_run1_out
-        .map { files -> files.find { it.toString().contains('_DIA.parquet') } }
+        .map { files -> files.find { it.toString().contains('_lib.parquet') } }
 
     diann_run2_ch = diann_run1_libs
         .toList()
