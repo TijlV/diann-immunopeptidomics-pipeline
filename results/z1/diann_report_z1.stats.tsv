@@ -1,3 +1,0 @@
-File.Name	Precursors.Identified	Proteins.Identified	Total.Quantity	MS1.Signal	MS2.Signal	FWHM.Scans	FWHM.RT	Median.Mass.Acc.MS1	Median.Mass.Acc.MS1.Corrected	Median.Mass.Acc.MS2	Median.Mass.Acc.MS2.Corrected	Normalisation.Instability	Median.RT.Prediction.Acc	Average.Peptide.Length	Average.Peptide.Charge	Average.Missed.Tryptic.Cleavages
-raw1/T064137_AurEl8_PM8_DIAIMP_CMB-1719_helalis_1_RD2_1_11076.d	651	511	4.62181e+07	74023396884	52054980000	2.954	0.047	1.2214	0.758154	2.81845	1.23961	0.00106261	0.161479	9.096	1	0.108
-raw1/T064139_AurEl8_PM8_DIAIMP_CMB-1719_helalis_2_RD3_1_11078.d	1047	750	8.82875e+07	65066156379	47449504959	3.051	0.049	1.09136	0.890933	2.79076	1.25987	0	0.18674	9.069	1	0.137

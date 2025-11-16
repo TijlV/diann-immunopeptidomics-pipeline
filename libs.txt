@@ -1,0 +1,11 @@
+[0:00] Loading spectral library lib_z1.predicted.speclib
+[2:34] Library annotated with sequence database(s): crap.fasta; EGD_human.fasta
+[2:52] Spectral library loaded: 23476 protein isoforms, 98629 protein groups and 39650340 precursors in 39650340 elution groups.
+
+[0:00] Loading spectral library lib_z2.predicted.speclib
+[4:37] Library annotated with sequence database(s): crap.fasta; EGD_human.fasta
+[5:12] Spectral library loaded: 23476 protein isoforms, 98933 protein groups and 67177095 precursors in 67177095 elution groups.
+
+[0:00] Loading spectral library lib_z3.predicted.speclib
+[3:40] Library annotated with sequence database(s): crap.fasta; EGD_human.fasta
+[3:59] Spectral library loaded: 23475 protein isoforms, 66581 protein groups and 46983960 precursors in 46983960 elution groups.

@@ -1,35 +1,45 @@
 #!/usr/bin/env nextflow
 
-process ref_lib_creation {
-    publishDir "${params.outDir}/libs", mode: 'copy'
-    container 'paretje/diann:2.2.0'
+process diann23test {
+    publishDir "test/", mode: 'copy'
+    container 'diann_docker'
 
     input:
+    val dia_files
     val min_pr_mz
     val max_pr_mz
     val min_charge
     val max_charge
     path fasta
+    path crap_fasta
 
     output:
-    path "ref_lib.predicted.speclib"
+    path("reflib.predicted.speclib")
 
     script:
     """
-    /diann-2.2.0/diann-linux \\
+    F_FILES=\$(for f in ${dia_files}/*.d; do echo -n "--f \$f "; done)
+
+    /diann-2.3.0/diann-linux \\
         --threads ${params.threads} \\
         --verbose 1 \\
-        --out report_ref_lib.parquet \\
+        --out report.parquet \\
         --qvalue ${params.qvalue} \\
         --matrices \\
+        \$F_FILES \\
         --min-corr ${params.min_corr} \\
         --corr-diff ${params.corr_diff} \\
         --time-corr-only \\
-        --out-lib ref_lib.parquet \\
+        --out-lib reflib.parquet \\
         --gen-spec-lib \\
         --predictor \\
+        --fasta "${crap_fasta}" \\
         --fasta "${fasta}" \\
-        --fasta-search \\
+        --pre-search \\
+        --pre-filter \\
+        --mass-acc 10 \\
+        --mass-acc-ms1 10 \\
+        --mass-acc-cal 20 \\
         --min-fr-mz ${params.min_fr_mz} \\
         --max-fr-mz ${params.max_fr_mz} \\
         --min-pep-len ${params.min_pep_len} \\
@@ -42,6 +52,7 @@ process ref_lib_creation {
         --var-mod ${params.var_mod} \\
         --proteoforms \\
         --rt-profiling \\
-        --cut\\
+        --cut "**" \\
+        --missed-cleavages 100
     """
 }

@@ -1,7 +1,0 @@
-{"Main .parquet report":"diann_report_z3.parquet"}
-{"Site report":"diann_report_z3.site_report.parquet"}
-{"Matrix of precursor quantities":"diann_report_z3.pr_matrix.tsv"}
-{"Matrix of QuantUMS/MaxLFQ protein group quantities":"diann_report_z3.pg_matrix.tsv"}
-{"Matrix of QuantUMS/MaxLFQ gene group quantities":"diann_report_z3.gg_matrix.tsv"}
-{"Matrix of QuantUMS/MaxLFQ gene quantities calculated with proteotypic peptides":"diann_report_z3.unique_genes_matrix.tsv"}
-{"Protein description":"diann_report_z3.protein_description.tsv"}

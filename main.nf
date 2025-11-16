@@ -1,33 +1,47 @@
 #!/usr/bin/env nextflow
 
 include { lib_creation } from './modules/lib_creation.nf'
-// include { ref_lib_creation } from './modules/ref_lib_creation.nf'
+include { fragmentation } from './modules/fragmentation.nf'
+include { MHC_prediction } from './modules/MHC_prediction.nf'
+include { ref_lib_creation } from './modules/ref_lib_creation.nf'
 include { diann_run1 } from './modules/diann_run1.nf'
 include { diann_run2 } from './modules/diann_run2.nf'
 
 workflow {
     if ( params.generate_libs ) {
-            // make z1/z2/z3 libraries
-        lib_creation_ch = Channel.from(params.lib_ranges)
+        // Make z1/z2/z3 libraries
+        lib_creation_ch = channel.from(params.lib_ranges)
             .map { it -> [it.min_pr_mz, it.max_pr_mz, it.charge, params.fasta, params.crap_fasta] }
 
         lib_creation(lib_creation_ch)
         lib_out_ch = lib_creation.out
     }
     else {
-        lib_files_with_charge = params.lib_ranges.collect { range -> [range.charge, file(params["lib_z${range.charge}"])] }
-        lib_out_ch = Channel.from(lib_files_with_charge)
+        lib_files_with_charge = params.lib_ranges.collect { range -> [range.charge, file(params["lib_z${range.charge}"])] } 
+        lib_out_ch = channel.from(lib_files_with_charge)
     }
 
-    // make MHC prediction librarby
+    // Make calibration librarby
+    // Fragment the proteins
+    fragmentation(params.fasta, params.crap_fasta)
 
-    // diann run 1
+    // Do MHC predictions
+    MHC_prediction(params.mixMHC_path, params.alleles, fragmentation.out, params.threshold)
+
+    // Generate calibration library
+    ref_lib_creation(params.min_pr_mz_ref, params.max_pr_mz_ref, params.min_pr_charge, params.max_pr_charge, MHC_prediction.out)
+    ref_lib = ref_lib_creation.out
+
+    // DIA-NN run 1
     diann_run1_ch = lib_out_ch
-        .map { charge, lib_file -> [charge, params.dia_files, params.fasta, params.crap_fasta, lib_file, params.ref_lib] }
-
+        .combine(ref_lib)
+        .map { charge, lib_file, ref_lib_file ->
+            [charge, params.dia_files, params.fasta, params.crap_fasta, lib_file, ref_lib_file]
+        }
+    
     diann_run1(diann_run1_ch)
     
-    // diann run 2
+    // DIA-NN run 2
     diann_run1_out = diann_run1.out
         .groupTuple()
 
