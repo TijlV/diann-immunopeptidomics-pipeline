@@ -1,53 +1,43 @@
 #!/usr/bin/env nextflow
 
-process diann23test {
-    publishDir "test/", mode: 'copy'
-    container 'diann_docker'
+process emperical_lib_creation_len {
+    publishDir "${params.outDir}/libs", mode: 'copy'
+    container 'paretje/diann:2.3.2'
 
     input:
-    val dia_files
-    val min_pr_mz
-    val max_pr_mz
-    val min_charge
-    val max_charge
     path fasta
     path crap_fasta
 
     output:
-    path("reflib.predicted.speclib")
+    path("infindia_ref_lib.predicted.speclib")
 
     script:
     """
-    F_FILES=\$(for f in ${dia_files}/*.d; do echo -n "--f \$f "; done)
-
-    /diann-2.3.0/diann-linux \\
+    /diann-2.3.2/diann-linux \\
         --threads ${params.threads} \\
         --verbose 1 \\
         --out report.parquet \\
         --qvalue ${params.qvalue} \\
         --matrices \\
-        \$F_FILES \\
         --min-corr ${params.min_corr} \\
         --corr-diff ${params.corr_diff} \\
         --time-corr-only \\
-        --out-lib reflib.parquet \\
+        --out-lib infindia_ref_lib.parquet \\
         --gen-spec-lib \\
         --predictor \\
         --fasta "${crap_fasta}" \\
         --fasta "${fasta}" \\
-        --pre-search \\
-        --pre-filter \\
-        --mass-acc 10 \\
-        --mass-acc-ms1 10 \\
-        --mass-acc-cal 20 \\
+        --fasta-search \\
         --min-fr-mz ${params.min_fr_mz} \\
         --max-fr-mz ${params.max_fr_mz} \\
-        --min-pep-len ${params.min_pep_len} \\
-        --max-pep-len ${params.max_pep_len} \\
-        --min-pr-mz ${min_pr_mz} \\
-        --max-pr-mz ${max_pr_mz} \\
-        --min-pr-charge ${min_charge} \\
-        --max-pr-charge ${max_charge} \\
+        --min-pr-charge ${params.min_pr_charge} \\
+        --max-pr-charge ${params.max_pr_charge} \\
+        --min-pr-mz ${params.min_pr_mz_ref} \\
+        --max-pr-mz ${params.max_pr_mz_ref} \\
+        --min-pep-len 8 \\
+        --max-pep-len 12 \\
+        --cut K*,R* \\
+        --missed-cleavages 1 \\
         --var-mods ${params.var_mods} \\
         --var-mod ${params.var_mod} \\
         --proteoforms \\

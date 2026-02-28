@@ -1,9 +1,7 @@
 #!/usr/bin/env nextflow
-
+include { emperical_lib_creation_len } from './modules/emperical_lib_creation.nf'
 include { lib_creation } from './modules/lib_creation.nf'
-include { fragmentation } from './modules/fragmentation.nf'
-include { MHC_prediction } from './modules/MHC_prediction.nf'
-include { ref_lib_creation } from './modules/ref_lib_creation.nf'
+include { infinDIA } from './modules/infinDIA.nf'
 include { diann_run1 } from './modules/diann_run1.nf'
 include { diann_run2 } from './modules/diann_run2.nf'
 
@@ -15,6 +13,10 @@ workflow {
 
         lib_creation(lib_creation_ch)
         lib_out_ch = lib_creation.out
+
+        // Make empirical library
+        emperical_lib_creation_len(params.fasta, params.crap_fasta)
+        ref_lib = emperical_lib_creation_len.out
     }
     else {
         lib_files_with_charge = params.lib_ranges.collect { range -> [range.charge, file(params["lib_z${range.charge}"])] } 
@@ -22,15 +24,10 @@ workflow {
     }
 
     // Make calibration librarby
-    // Fragment the proteins
-    fragmentation(params.fasta, params.crap_fasta)
-
-    // Do MHC predictions
-    MHC_prediction(params.mixMHC_path, params.alleles, fragmentation.out, params.threshold)
-
-    // Generate calibration library
-    ref_lib_creation(params.min_pr_mz_ref, params.max_pr_mz_ref, params.min_pr_charge, params.max_pr_charge, MHC_prediction.out)
-    ref_lib = ref_lib_creation.out
+    infiniDIA_ch = emperical_lib_creation_len.out
+        .map { path -> [params.dia_files, params.fasta, params.crap_fasta, path] }
+    
+    infinDIA(infiniDIA_ch)
 
     // DIA-NN run 1
     diann_run1_ch = lib_out_ch
