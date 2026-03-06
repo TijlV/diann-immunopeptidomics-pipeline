@@ -1,33 +1,34 @@
 #!/usr/bin/env nextflow
 
 process diann_run1 {
-    publishDir "${params.outDir}/z${charge}", mode: 'copy'
-    container 'paretje/diann:2.2.0'
+    publishDir "${params.outDir}/len${len}", mode: 'copy'
+    container 'paretje/diann:2.3.2'
 
     input:
-    tuple val(charge), path(dia_files), path(fasta), path(crap_fasta), path(lib), path(ref_lib)
+    tuple val(len), path(dia_files), path(fasta), path(crap_fasta), path(lib), path(ref_lib)
 
     output:
-    tuple path("diann_report_z${charge}.parquet"), 
-        path("diann_z${charge}_lib.parquet"),
-        path("diann_report_z${charge}.log.txt"),
-        path("diann_report_z${charge}.manifest.txt"),
-        path("diann_report_z${charge}.gg_matrix.tsv"),
-        path("diann_report_z${charge}.pg_matrix.tsv"),
-        path("diann_report_z${charge}.pr_matrix.tsv"),
-        path("diann_report_z${charge}.protein_description.tsv"),
-        path("diann_report_z${charge}.stats.tsv"),
-        path("diann_report_z${charge}.site_report.parquet"),
-        path("diann_report_z${charge}.unique_genes_matrix.tsv")
-    
+    tuple val(len),
+        path("diann_report_len${len}.parquet"),
+        path("diann_len${len}_lib.parquet"),
+        path("diann_report_len${len}.log.txt"),
+        path("diann_report_len${len}.manifest.txt"),
+        path("diann_report_len${len}.gg_matrix.tsv"),
+        path("diann_report_len${len}.pg_matrix.tsv"),
+        path("diann_report_len${len}.pr_matrix.tsv"),
+        path("diann_report_len${len}.protein_description.tsv"),
+        path("diann_report_len${len}.stats.tsv"),
+        path("diann_report_len${len}.site_report.parquet"),
+        path("diann_report_len${len}.unique_genes_matrix.tsv")
+
     script:
     """
-    F_FILES=\$(for f in ${dia_files}/*.d; do echo -n "--f \$f "; done)
-
-    /diann-2.2.0/diann-linux \\
+    F_FILES=\$(for f in ${dia_files}/*${params.file_suffix}; do echo -n "--f \$f "; done)
+    
+    /diann-2.3.2/diann-linux \\
         --threads ${params.threads} \\
         --verbose 1 \\
-        --out diann_report_z${charge}.parquet \\
+        --out diann_report_len${len}.parquet \\
         --qvalue ${params.qvalue} \\
         --matrices \\
         \$F_FILES \\
@@ -50,6 +51,6 @@ process diann_run1 {
         --fasta ${fasta} \\
         --proteoforms \\
         --gen-spec-lib \\
-        --out-lib diann_z${charge}_lib.parquet
+        --out-lib diann_len${len}_lib.parquet
     """
 }

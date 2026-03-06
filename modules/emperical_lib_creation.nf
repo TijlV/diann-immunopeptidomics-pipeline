@@ -32,10 +32,10 @@ process emperical_lib_creation_len {
         --max-fr-mz ${params.max_fr_mz} \\
         --min-pr-charge ${params.min_pr_charge} \\
         --max-pr-charge ${params.max_pr_charge} \\
-        --min-pr-mz ${params.min_pr_mz_ref} \\
-        --max-pr-mz ${params.max_pr_mz_ref} \\
-        --min-pep-len 8 \\
-        --max-pep-len 12 \\
+        --min-pr-mz ${params.min_pr_mz_lib} \\
+        --max-pr-mz ${params.max_pr_mz_lib} \\
+        --min-pep-len ${params.min_pep_len} \\
+        --max-pep-len ${params.max_pep_len} \\
         --cut K*,R* \\
         --missed-cleavages 1 \\
         --var-mods ${params.var_mods} \\

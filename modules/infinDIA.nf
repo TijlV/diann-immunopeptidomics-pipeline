@@ -14,7 +14,7 @@ process infinDIA {
 
     script:
     """
-    F_FILES=\$(for f in ${dia_files}/*.d; do echo -n "--f \$f "; done)
+    F_FILES=\$(for f in ${dia_files}/*${params.file_suffix}; do echo -n "--f \$f "; done)
 
         /diann-2.3.2/diann-linux \\
          --threads ${params.threads} \\
@@ -32,17 +32,17 @@ process infinDIA {
         --fasta "${fasta}" \\
         --pre-search \\
         --pre-filter \\
-        --mass-acc 10 \\
-        --mass-acc-ms1 10 \\
-        --mass-acc-cal 20 \\
+        --mass-acc ${params.mass_acc_ref} \\
+        --mass-acc-ms1 ${params.mass_acc_ms1_ref} \\
+        --mass-acc-cal ${params.mass_acc_cal_ref} \\
         --min-fr-mz ${params.min_fr_mz} \\
         --max-fr-mz ${params.max_fr_mz} \\
         --min-pr-charge ${params.min_pr_charge} \\
         --max-pr-charge ${params.max_pr_charge} \\
-        --min-pr-mz ${params.min_pr_mz_ref} \\
-        --max-pr-mz ${params.max_pr_mz_ref} \\
-        --min-pep-len 8 \\
-        --max-pep-len 12 \\
+        --min-pr-mz ${params.min_pr_mz_lib} \\
+        --max-pr-mz ${params.max_pr_mz_lib} \\
+        --min-pep-len ${params.min_pep_len} \\
+        --max-pep-len ${params.max_pep_len} \\
         --var-mods ${params.var_mods} \\
         --var-mod ${params.var_mod} \\
         --proteoforms \\
