@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
-process emperical_lib_creation_len {
-    publishDir "${params.outDir}/libs", mode: 'copy'
+process empirical_lib_creation {
+    publishDir "${params.outDir}/libs/empirical", mode: 'copy'
     container 'paretje/diann:2.3.2'
 
     input:

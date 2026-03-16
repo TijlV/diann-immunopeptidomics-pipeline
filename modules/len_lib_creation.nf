@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 process len_lib_creation {
-    publishDir "${params.outDir}/libs", mode: 'copy'
+    publishDir "${params.outDir}/libs/lengths", mode: 'copy'
     container 'paretje/diann:2.3.2'
 
     input:

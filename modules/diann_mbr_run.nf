@@ -1,22 +1,22 @@
 #!/usr/bin/env nextflow
 
 process diann_mbr_run {
-    publishDir "${params.outDir}/emperical", mode: 'copy'
+    publishDir "${params.outDir}/empirical", mode: 'copy'
     container 'paretje/diann:2.3.2'
 
     input:
     tuple path(dia_files), path(fasta), path(crap_fasta), path(lib_files)
 
     output:
-    path "diann_emperical_DIA.parquet"
-    path "diann_emperical_DIA.site_report.parquet"
-    path "diann_emperical_DIA.pr_matrix.tsv"
-    path "diann_emperical_DIA.pg_matrix.tsv"
-    path "diann_emperical_DIA.gg_matrix.tsv"
-    path "diann_emperical_DIA.unique_genes_matrix.tsv"
-    path "diann_emperical_DIA.manifest.txt"
-    path "diann_emperical_DIA.stats.tsv"
-    path "diann_emperical_DIA.log.txt"
+    path "diann_empirical_DIA.parquet"
+    path "diann_empirical_DIA.site_report.parquet"
+    path "diann_empirical_DIA.pr_matrix.tsv"
+    path "diann_empirical_DIA.pg_matrix.tsv"
+    path "diann_empirical_DIA.gg_matrix.tsv"
+    path "diann_empirical_DIA.unique_genes_matrix.tsv"
+    path "diann_empirical_DIA.manifest.txt"
+    path "diann_empirical_DIA.stats.tsv"
+    path "diann_empirical_DIA.log.txt"
 
     script:
     """
@@ -26,7 +26,7 @@ process diann_mbr_run {
     /diann-2.3.2/diann-linux \\
         --threads ${params.threads} \\
         --verbose 1 \\
-        --out diann_emperical_DIA.parquet \\
+        --out diann_empirical_DIA.parquet \\
         --qvalue ${params.qvalue} \\
         --matrices \\
         --xic \\
