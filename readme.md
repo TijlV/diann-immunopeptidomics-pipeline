@@ -70,7 +70,7 @@ To customize individual DIA-NN module settings beyond what is exposed in `nextfl
 nextflow run main.nf
 ```
 
-For additional run options (e.g. `-resume`, `-profile`, `-with-tower`), refer to the [Nextflow documentation](https://www.nextflow.io/docs/latest/index.html).
+For additional run options (e.g. `-resume`, `-profile`, `-with-report`), refer to the [Nextflow documentation](https://www.nextflow.io/docs/latest/index.html).
 
 ### Output Structure
 
@@ -84,7 +84,7 @@ Output/
 ├── len11/
 ├── len12/
 └── libs/
-    ├── empirical       # Empirical library used for the infinDIA search
+    ├── empirical/      # Empirical library used for the infinDIA search
     └── lengths/        # Per-length spectral libraries
 ```
 
