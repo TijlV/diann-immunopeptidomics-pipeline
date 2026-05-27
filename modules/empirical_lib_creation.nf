@@ -9,7 +9,7 @@ process empirical_lib_creation {
     path crap_fasta
 
     output:
-    path("infindia_ref_lib.predicted.speclib")
+    path("empirical_lib.predicted.speclib")
 
     script:
     """
@@ -22,7 +22,7 @@ process empirical_lib_creation {
         --min-corr ${params.min_corr} \\
         --corr-diff ${params.corr_diff} \\
         --time-corr-only \\
-        --out-lib infindia_ref_lib.parquet \\
+        --out-lib empirical_lib.parquet \\
         --gen-spec-lib \\
         --predictor \\
         --fasta "${crap_fasta}" \\

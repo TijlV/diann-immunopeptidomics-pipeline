@@ -5,7 +5,6 @@ process infinDIA {
     container 'paretje/diann:2.3.2'
 
     input:
-    // TO DO COMBINE LEN LIBS
     tuple path(dia_files), path(fasta), path(crap_fasta), path(lib)
 
     output:
