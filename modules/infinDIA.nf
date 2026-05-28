@@ -8,8 +8,27 @@ process infinDIA {
     tuple path(dia_files), path(fasta), path(crap_fasta), path(lib)
 
     output:
-    // TO DO ADAPT OUTPUT FILES
     path "reflib.parquet"
+    path "reflib.parquet.skyline.speclib"
+    path "infinDIA-first-pass.manifest.txt"
+    path "infinDIA-first-pass.parquet"
+    path "infinDIA-first-pass.pr_matrix.tsv"
+    path "infinDIA-first-pass.site_report.parquet"
+    path "infinDIA-first-pass.stats.tsv"
+    path "infinDIA-first-pass.UniMod_312_sites_90.tsv"
+    path "infinDIA-first-pass.UniMod_312_sites_99.tsv"
+    path "infinDIA.gg_matrix.tsv"
+    path "infinDIA.log.txt"
+    path "infinDIA.manifest.txt"
+    path "infinDIA.parquet"
+    path "infinDIA.pg_matrix.tsv"
+    path "infinDIA.pr_matrix.tsv"
+    path "infinDIA.protein_description.tsv"
+    path "infinDIA.site_report.parquet"
+    path "infinDIA.stats.tsv"
+    path "infinDIA.UniMod_312_sites_90.tsv"
+    path "infinDIA.UniMod_312_sites_99.tsv"
+    path "infinDIA.unique_genes_matrix.tsv"
 
     script:
     """
@@ -18,7 +37,7 @@ process infinDIA {
         /diann-2.3.2/diann-linux \\
          --threads ${params.threads} \\
         --verbose 1 \\
-        --out report.parquet \\
+        --out infinDIA.parquet \\
         --qvalue ${params.qvalue} \\
         --matrices \\
         \$F_FILES \\
@@ -46,6 +65,8 @@ process infinDIA {
         --var-mod ${params.var_mod} \\
         --proteoforms \\
         --rt-profiling \\
+        --gen-spec-lib \\
+        --reanalyse \\
         --cut "**" \\
         --missed-cleavages 100 \\
         || true
