@@ -43,14 +43,14 @@ docker pull paretje/diann:2.3.2
 ### `length_split.nf` — Length-split pipeline
 Reduces the DIA-NN search space by splitting spectral libraries by peptide length. The workflow proceeds in three stages:
 
-1. **Calibration search (`infinDIA`)** — A full-space search is performed to generate a calibration library, improving retention time and mass accuracy for downstream searches.
+1. **InfinDIA search** — A full-space search is performed to generate a calibration library, improving retention time and mass accuracy for downstream searches.
 2. **Per-length searches** — Each peptide length subset is searched independently using the calibration library, parallelizing the workload.
 3. **Match-between-runs (MBR)** — Results from all length-specific searches are merged and an MBR step is performed, maximizing identification depth.
 
 ### `empirical.nf` — Empirical library pipeline
 A simplified single-library workflow intended for situations where a high-quality empirical spectral library already exists. The workflow proceeds in two stages:
 
-1. **Calibration search (`infinDIA`)** — Refines the empirical library using a full-space search to improve retention time and mass accuracy.
+1. **InfinDIA search** — A full-space search is performed to generate a calibration library, improving retention time and mass accuracy for downstream searches.
 2. **Combined DIA-NN run** — A single DIA-NN run performs the first-pass search and MBR in one step using the empirical library, producing the final output directly.
 
 ---
@@ -113,7 +113,7 @@ Output/
 ```
 Output/
 ├── empirical/          # Final DIA-NN output (first-pass + MBR combined)
-├── infinDIA/           # Results from the calibration search
+├── infinDIA/           # Results from the infinDIA search
 └── libs/
     └── empirical/      # Empirical library used for the infinDIA search
 ```
