@@ -97,7 +97,7 @@ For additional run options (e.g. `-resume`, `-profile`, `-with-report`), refer t
 ```
 Output/
 ├── empirical/          # Final DIA-NN output after match-between-runs
-├── infinDIA/           # Results from the full-space calibration search
+├── infinDIA/           # Results from the infinDIA search
 ├── len8/               # Search results for peptides of length 8
 ├── len9/
 ├── len10/
